@@ -1,5 +1,6 @@
 package principal;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Tabela {
@@ -9,6 +10,8 @@ public class Tabela {
 	private int fours;
 	private int fives;
 	private int sixes;
+	private int total1;
+	private int bonus;
 
 	private int tresIguais;
 	private int quatroIguais;
@@ -17,6 +20,7 @@ public class Tabela {
 	private int sequenciaMaior;
 	private int somaDeTodos;
 	private int yahtzee;
+	private int totalFinal;
 
 	public int getOnes() {
 		return ones;
@@ -122,6 +126,30 @@ public class Tabela {
 		this.yahtzee = yahtzee;
 	}
 
+	public int getTotal1() {
+		return total1;
+	}
+
+	public void setTotal1(int total1) {
+		this.total1 = total1;
+	}
+
+	public int getBonus() {
+		return bonus;
+	}
+
+	public void setBonus(int bonus) {
+		this.bonus = bonus;
+	}
+
+	public int getTotalFinal() {
+		return totalFinal;
+	}
+
+	public void setTotalFinal(int totalFinal) {
+		this.totalFinal = totalFinal;
+	}
+
 	public void mostrarTabela() {
 		System.out.println("Ones: " + getOnes());
 		System.out.println("Twos: " + getTwos());
@@ -200,16 +228,141 @@ public class Tabela {
 
 	public void tresIguais(List<Dados> dados) {
 		int total = 0;
-		int dado1 = dados.indexOf(0);
-		int dado2 = dados.indexOf(1);
-		int dado3 = dados.indexOf(2);
-		int dado4 = dados.indexOf(3);
-		int dado5 = dados.indexOf(4);
+		int dado1 = dados.get(0).getNumFace();
+		int dado2 = dados.get(1).getNumFace();
+		int dado3 = dados.get(2).getNumFace();
+		int dado4 = dados.get(3).getNumFace();
+		int dado5 = dados.get(4).getNumFace();
 
-		if (dado1 == dado2 || dado2 == dado3) {
+		if ((dado1 == dado2 && dado2 == dado3) || (dado1 == dado2 && dado2 == dado4)
+				|| (dado1 == dado2 && dado2 == dado5) || (dado1 == dado3 && dado3 == dado4)
+				|| (dado1 == dado3 && dado3 == dado5) || (dado1 == dado4 && dado4 == dado5)
+				|| (dado2 == dado3 && dado3 == dado4) || (dado2 == dado3 && dado3 == dado5)
+				|| (dado2 == dado4 && dado4 == dado5) || (dado3 == dado4 && dado4 == dado5)) {
 			total = dado1 + dado2 + dado3 + dado4 + dado5;
-		}else if()
+		}
 
 		setTresIguais(total);
+	}
+
+	public void quatroIguais(List<Dados> dados) {
+		int total = 0;
+		int dado1 = dados.get(0).getNumFace();
+		int dado2 = dados.get(1).getNumFace();
+		int dado3 = dados.get(2).getNumFace();
+		int dado4 = dados.get(3).getNumFace();
+		int dado5 = dados.get(4).getNumFace();
+
+		if ((dado1 == dado2 && dado2 == dado3 && dado3 == dado4) || (dado1 == dado2 && dado2 == dado3 && dado3 == dado5)
+				|| (dado1 == dado2 && dado2 == dado4 && dado4 == dado5)
+				|| (dado1 == dado3 && dado3 == dado4 && dado4 == dado5)
+				|| (dado2 == dado3 && dado3 == dado4 && dado4 == dado5)) {
+			total = dado1 + dado2 + dado3 + dado4 + dado5;
+		}
+		setQuatroIguais(total);
+	}
+
+	public void fullHouse(List<Dados> dados) {
+		int total = 0;
+		int dado1 = dados.get(0).getNumFace();
+		int dado2 = dados.get(1).getNumFace();
+		int dado3 = dados.get(2).getNumFace();
+		int dado4 = dados.get(3).getNumFace();
+		int dado5 = dados.get(4).getNumFace();
+
+		if ((dado1 == dado2 && dado3 != dado1 && dado4 != dado1 && dado5 != dado1)
+				|| (dado1 == dado3 && dado2 != dado1 && dado4 != dado1 && dado5 != dado1)
+				|| (dado1 == dado4 && dado2 != dado1 && dado3 != dado1 && dado5 != dado1)
+				|| (dado1 == dado5 && dado2 != dado1 && dado3 != dado1 && dado4 != dado1)
+				|| (dado2 == dado3 && dado1 != dado2 && dado4 != dado2 && dado5 != dado2)
+				|| (dado2 == dado4 && dado1 != dado2 && dado3 != dado2 && dado5 != dado2)
+				|| (dado2 == dado5 && dado1 != dado2 && dado3 != dado2 && dado4 != dado2)
+				|| (dado3 == dado4 && dado1 != dado3 && dado2 != dado3 && dado5 != dado3)
+				|| (dado3 == dado5 && dado1 != dado3 && dado2 != dado3 && dado4 != dado3)
+				|| (dado4 == dado5 && dado1 != dado4 && dado2 != dado4 && dado3 != dado4)) {
+
+			if ((dado1 == dado2 && dado2 == dado3 && dado4 != dado1 && dado5 != dado1)
+					|| (dado1 == dado2 && dado2 == dado4 && dado3 != dado1 && dado5 != dado1)
+					|| (dado1 == dado2 && dado2 == dado5 && dado3 != dado1 && dado4 != dado1)
+					|| (dado1 == dado3 && dado3 == dado4 && dado2 != dado1 && dado5 != dado1)
+					|| (dado1 == dado3 && dado3 == dado5 && dado2 != dado1 && dado4 != dado1)
+					|| (dado1 == dado4 && dado4 == dado5 && dado2 != dado1 && dado3 != dado1)
+					|| (dado2 == dado3 && dado3 == dado4 && dado1 != dado2 && dado5 != dado2)
+					|| (dado2 == dado3 && dado3 == dado5 && dado1 != dado2 && dado4 != dado2)
+					|| (dado2 == dado4 && dado4 == dado5 && dado1 != dado2 && dado3 != dado2)
+					|| (dado3 == dado4 && dado4 == dado5 && dado1 != dado3 && dado2 != dado3)) {
+				total = 25;
+			}
+		}
+		setFullHouse(total);
+	}
+
+	public void sequenciaMenor(List<Dados> dados) {
+		int total = 0;
+		int dado1 = dados.get(0).getNumFace();
+		int dado2 = dados.get(1).getNumFace();
+		int dado3 = dados.get(2).getNumFace();
+		int dado4 = dados.get(3).getNumFace();
+		int dado5 = dados.get(4).getNumFace();
+		int[] listaDados = { dado1, dado2, dado3, dado4, dado5 };
+		Arrays.sort(listaDados);
+
+		for (int i = 0; i < listaDados.length - 3; i++) {
+			if (listaDados[i] + 1 == listaDados[i + 1] && listaDados[i] + 2 == listaDados[i + 2]
+					&& listaDados[i] + 3 == listaDados[i + 3]) {
+				total = 30;
+			}
+		}
+		setSequenciaMenor(total);
+	}
+
+	public void sequenciaMaior(List<Dados> dados) {
+		int total = 0;
+		int dado1 = dados.get(0).getNumFace();
+		int dado2 = dados.get(1).getNumFace();
+		int dado3 = dados.get(2).getNumFace();
+		int dado4 = dados.get(3).getNumFace();
+		int dado5 = dados.get(4).getNumFace();
+		int[] listaDados = { dado1, dado2, dado3, dado4, dado5 };
+		Arrays.sort(listaDados);
+
+		for (int i = 0; i < listaDados.length - 4; i++) {
+			if (listaDados[i] + 1 == listaDados[i + 1] && listaDados[i] + 2 == listaDados[i + 2]
+					&& listaDados[i] + 3 == listaDados[i + 3] && listaDados[i] + 4 == listaDados[i + 4]) {
+				total = 40;
+			}
+		}
+		setSequenciaMaior(total);
+	}
+
+	public void somaDeTodos(List<Dados> dados) {
+		setSomaDeTodos(dados.get(0).getNumFace() + dados.get(1).getNumFace() + dados.get(2).getNumFace()
+				+ dados.get(3).getNumFace() + dados.get(4).getNumFace());
+	}
+
+	public void yahtzee(List<Dados> dados) {
+		int total = 0;
+		if (dados.get(0).getNumFace() == dados.get(1).getNumFace()
+				&& dados.get(1).getNumFace() == dados.get(2).getNumFace()
+				&& dados.get(2).getNumFace() == dados.get(3).getNumFace()
+				&& dados.get(3).getNumFace() == dados.get(4).getNumFace()) {
+			total = 50;
+		}
+		setYahtzee(total);
+	}
+
+	public void bonus() {
+		if (getTotal1() >= 63) {
+			setTotal1(total1 += 35);
+		}
+	}
+
+	public void total1() {
+		setTotal1(ones + twos + threes + fours + fives + sixes);
+	}
+
+	public void totalFinal() {
+		setTotalFinal(getTotal1() + tresIguais + quatroIguais + fullHouse + sequenciaMaior + sequenciaMenor
+				+ somaDeTodos + yahtzee);
 	}
 }

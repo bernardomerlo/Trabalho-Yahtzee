@@ -5,6 +5,7 @@ import java.util.List;
 public class Jogador {
 	private String nome;
 	private List<Dados> listaDeDados;
+	private Tabela t = new Tabela();
 
 	public Jogador(String nome) {
 		super();
@@ -27,7 +28,11 @@ public class Jogador {
 		this.listaDeDados = listaDeDados;
 	}
 
-	public void criarTabela() {
-		Tabela t = new Tabela();
+	public Tabela getT() {
+		return t;
+	}
+
+	public void setT(Tabela t) {
+		this.t = t;
 	}
 }

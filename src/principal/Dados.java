@@ -5,17 +5,17 @@ import java.util.Random;
 public class Dados {
 	private int numFace;
 
-	public Dados() {
-	}
-
 	public int getNumFace() {
 		return numFace;
 	}
 
+	public void setNumFace(int numFace) {
+		this.numFace = numFace;
+	}
 
-	public int rolar() {
+	public void rolar() {
 		Random face = new Random();
-		return face.nextInt(6) + 1;
+		setNumFace(face.nextInt(6) + 1);
 	}
 
 }
