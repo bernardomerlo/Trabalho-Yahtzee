@@ -63,6 +63,7 @@ public class TesteTabelas {
 		System.out.println("t.somaDeTodos(d) = " + t.getSomaDeTodos());
 		t.yahtzee(d);
 		System.out.println("t.yatzhee(d) = " + t.getYahtzee());
+
 	}
 
 }

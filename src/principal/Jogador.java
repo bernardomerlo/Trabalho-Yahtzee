@@ -4,7 +4,9 @@ import java.util.List;
 
 public class Jogador {
 	private String nome;
-	private List<Dados> listaDeDados;
+	private List<Dados> dadosAtuais;
+	private List<Dados> dadosSalvos;
+
 	private Tabela t = new Tabela();
 
 	public Jogador(String nome) {
@@ -20,12 +22,12 @@ public class Jogador {
 		this.nome = nome;
 	}
 
-	public List<Dados> getListaDeDados() {
-		return listaDeDados;
+	public List<Dados> getDadosAtuais() {
+		return dadosAtuais;
 	}
 
-	public void setListaDeDados(List<Dados> listaDeDados) {
-		this.listaDeDados = listaDeDados;
+	public void setDadosAtuais(List<Dados> dadosAtuais) {
+		this.dadosAtuais = dadosAtuais;
 	}
 
 	public Tabela getT() {
@@ -34,5 +36,13 @@ public class Jogador {
 
 	public void setT(Tabela t) {
 		this.t = t;
+	}
+
+	public List<Dados> getDadosSalvos() {
+		return dadosSalvos;
+	}
+
+	public void setDadosSalvos(List<Dados> dadosSalvos) {
+		this.dadosSalvos = dadosSalvos;
 	}
 }
