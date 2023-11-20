@@ -1,7 +1,6 @@
 package principal;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class Tabela {
 	private int ones;
@@ -166,7 +165,7 @@ public class Tabela {
 		System.out.println("Yahtzee: " + getYahtzee());
 	}
 
-	public void ones(List<Dados> dados) {
+	public void ones(Dados[] dados) {
 		int total = 0;
 		for (Dados d : dados) {
 			if (d.getNumFace() == 1) {
@@ -176,7 +175,7 @@ public class Tabela {
 		setOnes(total);
 	}
 
-	public void twos(List<Dados> dados) {
+	public void twos(Dados[] dados) {
 		int total = 0;
 		for (Dados d : dados) {
 			if (d.getNumFace() == 2) {
@@ -186,7 +185,7 @@ public class Tabela {
 		setTwos(total);
 	}
 
-	public void threes(List<Dados> dados) {
+	public void threes(Dados[] dados) {
 		int total = 0;
 		for (Dados d : dados) {
 			if (d.getNumFace() == 3) {
@@ -196,7 +195,7 @@ public class Tabela {
 		setThrees(total);
 	}
 
-	public void fours(List<Dados> dados) {
+	public void fours(Dados[] dados) {
 		int total = 0;
 		for (Dados d : dados) {
 			if (d.getNumFace() == 4) {
@@ -206,7 +205,7 @@ public class Tabela {
 		setFours(total);
 	}
 
-	public void fives(List<Dados> dados) {
+	public void fives(Dados[] dados) {
 		int total = 0;
 		for (Dados d : dados) {
 			if (d.getNumFace() == 5) {
@@ -216,7 +215,7 @@ public class Tabela {
 		setFives(total);
 	}
 
-	public void sixes(List<Dados> dados) {
+	public void sixes(Dados[] dados) {
 		int total = 0;
 		for (Dados d : dados) {
 			if (d.getNumFace() == 6) {
@@ -226,13 +225,13 @@ public class Tabela {
 		setSixes(total);
 	}
 
-	public void tresIguais(List<Dados> dados) {
+	public void tresIguais(Dados[] dados) {
 		int total = 0;
-		int dado1 = dados.get(0).getNumFace();
-		int dado2 = dados.get(1).getNumFace();
-		int dado3 = dados.get(2).getNumFace();
-		int dado4 = dados.get(3).getNumFace();
-		int dado5 = dados.get(4).getNumFace();
+		int dado1 = dados[0].getNumFace();
+		int dado2 = dados[1].getNumFace();
+		int dado3 = dados[2].getNumFace();
+		int dado4 = dados[3].getNumFace();
+		int dado5 = dados[4].getNumFace();
 
 		if ((dado1 == dado2 && dado2 == dado3) || (dado1 == dado2 && dado2 == dado4)
 				|| (dado1 == dado2 && dado2 == dado5) || (dado1 == dado3 && dado3 == dado4)
@@ -245,13 +244,13 @@ public class Tabela {
 		setTresIguais(total);
 	}
 
-	public void quatroIguais(List<Dados> dados) {
+	public void quatroIguais(Dados[] dados) {
 		int total = 0;
-		int dado1 = dados.get(0).getNumFace();
-		int dado2 = dados.get(1).getNumFace();
-		int dado3 = dados.get(2).getNumFace();
-		int dado4 = dados.get(3).getNumFace();
-		int dado5 = dados.get(4).getNumFace();
+		int dado1 = dados[0].getNumFace();
+		int dado2 = dados[1].getNumFace();
+		int dado3 = dados[2].getNumFace();
+		int dado4 = dados[3].getNumFace();
+		int dado5 = dados[4].getNumFace();
 
 		if ((dado1 == dado2 && dado2 == dado3 && dado3 == dado4) || (dado1 == dado2 && dado2 == dado3 && dado3 == dado5)
 				|| (dado1 == dado2 && dado2 == dado4 && dado4 == dado5)
@@ -262,13 +261,13 @@ public class Tabela {
 		setQuatroIguais(total);
 	}
 
-	public void fullHouse(List<Dados> dados) {
+	public void fullHouse(Dados[] dados) {
 		int total = 0;
-		int dado1 = dados.get(0).getNumFace();
-		int dado2 = dados.get(1).getNumFace();
-		int dado3 = dados.get(2).getNumFace();
-		int dado4 = dados.get(3).getNumFace();
-		int dado5 = dados.get(4).getNumFace();
+		int dado1 = dados[0].getNumFace();
+		int dado2 = dados[1].getNumFace();
+		int dado3 = dados[2].getNumFace();
+		int dado4 = dados[3].getNumFace();
+		int dado5 = dados[4].getNumFace();
 
 		if ((dado1 == dado2 && dado3 != dado1 && dado4 != dado1 && dado5 != dado1)
 				|| (dado1 == dado3 && dado2 != dado1 && dado4 != dado1 && dado5 != dado1)
@@ -297,13 +296,13 @@ public class Tabela {
 		setFullHouse(total);
 	}
 
-	public void sequenciaMenor(List<Dados> dados) {
+	public void sequenciaMenor(Dados[] dados) {
 		int total = 0;
-		int dado1 = dados.get(0).getNumFace();
-		int dado2 = dados.get(1).getNumFace();
-		int dado3 = dados.get(2).getNumFace();
-		int dado4 = dados.get(3).getNumFace();
-		int dado5 = dados.get(4).getNumFace();
+		int dado1 = dados[0].getNumFace();
+		int dado2 = dados[1].getNumFace();
+		int dado3 = dados[2].getNumFace();
+		int dado4 = dados[3].getNumFace();
+		int dado5 = dados[4].getNumFace();
 		int[] listaDados = { dado1, dado2, dado3, dado4, dado5 };
 		Arrays.sort(listaDados);
 
@@ -316,13 +315,13 @@ public class Tabela {
 		setSequenciaMenor(total);
 	}
 
-	public void sequenciaMaior(List<Dados> dados) {
+	public void sequenciaMaior(Dados[] dados) {
 		int total = 0;
-		int dado1 = dados.get(0).getNumFace();
-		int dado2 = dados.get(1).getNumFace();
-		int dado3 = dados.get(2).getNumFace();
-		int dado4 = dados.get(3).getNumFace();
-		int dado5 = dados.get(4).getNumFace();
+		int dado1 = dados[0].getNumFace();
+		int dado2 = dados[1].getNumFace();
+		int dado3 = dados[2].getNumFace();
+		int dado4 = dados[3].getNumFace();
+		int dado5 = dados[4].getNumFace();
 		int[] listaDados = { dado1, dado2, dado3, dado4, dado5 };
 		Arrays.sort(listaDados);
 
@@ -335,17 +334,15 @@ public class Tabela {
 		setSequenciaMaior(total);
 	}
 
-	public void somaDeTodos(List<Dados> dados) {
-		setSomaDeTodos(dados.get(0).getNumFace() + dados.get(1).getNumFace() + dados.get(2).getNumFace()
-				+ dados.get(3).getNumFace() + dados.get(4).getNumFace());
+	public void somaDeTodos(Dados[] dados) {
+		setSomaDeTodos(dados[0].getNumFace() + dados[1].getNumFace() + dados[2].getNumFace() + dados[3].getNumFace()
+				+ dados[4].getNumFace());
 	}
 
-	public void yahtzee(List<Dados> dados) {
+	public void yahtzee(Dados[] dados) {
 		int total = 0;
-		if (dados.get(0).getNumFace() == dados.get(1).getNumFace()
-				&& dados.get(1).getNumFace() == dados.get(2).getNumFace()
-				&& dados.get(2).getNumFace() == dados.get(3).getNumFace()
-				&& dados.get(3).getNumFace() == dados.get(4).getNumFace()) {
+		if (dados[0].getNumFace() == dados[1].getNumFace() && dados[1].getNumFace() == dados[2].getNumFace()
+				&& dados[2].getNumFace() == dados[3].getNumFace() && dados[3].getNumFace() == dados[4].getNumFace()) {
 			total = 50;
 		}
 		setYahtzee(total);
