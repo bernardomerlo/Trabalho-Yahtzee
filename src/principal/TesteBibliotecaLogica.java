@@ -2,59 +2,59 @@ package principal;
 
 import java.util.Scanner;
 
-public class TesteSeleçãoDeDados {
+public class TesteBibliotecaLogica {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 
-		Jogador j = new Jogador("Bernardo");
-		Tabela tabelaJogador1 = new Tabela();
-		j.setT(tabelaJogador1);
-		Dados dado1 = new Dados();
-		Dados dado2 = new Dados();
-		Dados dado3 = new Dados();
-		Dados dado4 = new Dados();
-		Dados dado5 = new Dados();
-		dado1.setNumFace(0);
-		dado2.setNumFace(1);
-		dado3.setNumFace(2);
-		dado4.setNumFace(3);
-		dado5.setNumFace(4);
+		Dados[] dadosIniciais = new Dados[5];
+		Dados[] dadosAux = new Dados[5];
 
-		Dados[] d = { dado1, dado2, dado3, dado4, dado5 };
-		Dados[] dadosGuardados = new Dados[5];
+		Dados d1 = new Dados();
+		Dados d2 = new Dados();
+		Dados d3 = new Dados();
+		Dados d4 = new Dados();
+		Dados d5 = new Dados();
 
-		for (int i = 0; i < 3; i++) {
+		dadosIniciais[0] = d1;
+		dadosIniciais[1] = d2;
+		dadosIniciais[2] = d3;
+		dadosIniciais[3] = d4;
+		dadosIniciais[4] = d5;
 
-			for (Dados dados : d) {
-				dados.rolar();
-				System.out.println("face: " + dados.getNumFace());
+		for (int rodadas = 0; rodadas < 3; rodadas++) {
+			for (int i = 0; i < dadosIniciais.length; i++) {
+				if (dadosIniciais[i] != null) {
+					dadosIniciais[i].rolar();
+					System.out.println("Face do dado" + i + " " + dadosIniciais[i].getNumFace());
+
+				}
 			}
 
-			char escolha = 's';
-			do {
-				System.out.println("Deseja salvar algum dado? (s/n)");
-				escolha = sc.nextLine().charAt(0);
-
-				if (escolha == 's') {
-					System.out.println("Digite o índice do dado que deseja salvar: ");
-					int indiceDado = sc.nextInt();
-
-					if (indiceDado >= 0 && indiceDado < d.length) {
-						Dados dadoTemp = d[indiceDado];
-						dadosGuardados[indiceDado] = dadoTemp; // adiciona na lista de dados guardados
-						Dados dadoVoltando = new Dados();
-						dadoVoltando.setPosVetor(indiceDado);
-						d[indiceDado] = dadoVoltando; // remove da lista de dados atuais
-						System.out.println("Dado da face " + dadoTemp.getNumFace() + " guardado");
-					} else {
-						System.out.println("Índice inválido. Tente novamente.");
-					}
-
-					sc.nextLine();
+			System.out.println("Vai salvar algum? ");
+			char escolha = sc.next().charAt(0);
+			if (escolha == 's') {
+				System.out.println("Quantos? ");
+				int tamanhoVetor = sc.nextInt();
+				for (int j = 0; j < tamanhoVetor; j++) {
+					System.out.println("Qual? ");
+					int indexDado = sc.nextInt();
+					dadosAux[indexDado] = dadosIniciais[indexDado];
+					dadosIniciais[indexDado] = null;
+					System.out.println("DADO DA POSICAO " + indexDado + " SALVO");
 				}
 
-			} while (escolha == 's');
+				for (Dados d : dadosAux) {
+					if (d != null)
+						System.out.println(d.getNumFace());
+				}
+				System.out.println("==========================");
+				for (Dados d : dadosIniciais) {
+					if (d != null)
+						System.out.println(d.getNumFace());
+				}
+
+			}
 
 			Tabela t = new Tabela();
 
@@ -64,30 +64,30 @@ public class TesteSeleçãoDeDados {
 			Dados d4Final = new Dados();
 			Dados d5Final = new Dados();
 
-			if (d[0] == null) {
-				d1Final = dadosGuardados[0];
+			if (dadosIniciais[0] == null) {
+				d1Final = dadosAux[0];
 			} else {
-				d1Final = d[0];
+				d1Final = dadosIniciais[0];
 			}
-			if (d[1] == null) {
-				d2Final = dadosGuardados[1];
+			if (dadosIniciais[1] == null) {
+				d2Final = dadosAux[1];
 			} else {
-				d2Final = d[1];
+				d2Final = dadosIniciais[1];
 			}
-			if (d[2] == null) {
-				d3Final = dadosGuardados[2];
+			if (dadosIniciais[2] == null) {
+				d3Final = dadosAux[2];
 			} else {
-				d3Final = d[2];
+				d3Final = dadosIniciais[2];
 			}
-			if (d[3] == null) {
-				d4Final = dadosGuardados[3];
+			if (dadosIniciais[3] == null) {
+				d4Final = dadosAux[3];
 			} else {
-				d4Final = d[3];
+				d4Final = dadosIniciais[3];
 			}
-			if (d[4] == null) {
-				d5Final = dadosGuardados[4];
+			if (dadosIniciais[4] == null) {
+				d5Final = dadosAux[4];
 			} else {
-				d5Final = d[4];
+				d5Final = dadosIniciais[4];
 			}
 
 			Dados[] dadosFinal = { d1Final, d2Final, d3Final, d4Final, d5Final };
@@ -122,16 +122,15 @@ public class TesteSeleçãoDeDados {
 			System.out.println("12-t.somaDeTodos(d) = " + t.getSomaDeTodos());
 			t.yahtzee(dadosFinal);
 			System.out.println("13-t.yatzhee(d) = " + t.getYahtzee());
-			
-	
+
 			System.out.println("Digite o que voce deseja atribuir: ");
 			int escolhaAtribuir = sc.nextInt();
-			if(escolhaAtribuir == 1) {
-				
+			if (escolhaAtribuir == 1) {
+
 			}
 
 		}
 		sc.close();
-	}
 
+	}
 }
