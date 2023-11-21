@@ -6,6 +6,7 @@ public class Jogador {
 	private String nome;
 	private List<Dados> dadosAtuais;
 	private List<Dados> dadosSalvos;
+	private boolean jogou;
 
 	private Tabela t = new Tabela();
 
@@ -45,4 +46,17 @@ public class Jogador {
 	public void setDadosSalvos(List<Dados> dadosSalvos) {
 		this.dadosSalvos = dadosSalvos;
 	}
+
+	public boolean isJogou() {
+		return jogou;
+	}
+
+	public void setJogou(boolean jogou) {
+		this.jogou = jogou;
+	}
+
+	public void alternarJogou() {
+		jogou = !jogou;
+	}
+
 }

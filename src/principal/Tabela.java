@@ -1,5 +1,7 @@
 package principal;
 
+import java.util.Arrays;
+
 public class Tabela {
 	private int ones;
 	private int twos;
@@ -302,10 +304,11 @@ public class Tabela {
 		int dado4 = dados[3].getNumFace();
 		int dado5 = dados[4].getNumFace();
 		int[] listaDados = { dado1, dado2, dado3, dado4, dado5 };
+		Arrays.sort(listaDados);
 
 		for (int i = 0; i < listaDados.length - 3; i++) {
-			if (listaDados[i] + 1 == listaDados[i + 1] && listaDados[i] + 2 == listaDados[i + 2]
-					&& listaDados[i] + 3 == listaDados[i + 3]) {
+			if (listaDados[i] + 1 == listaDados[i + 1] && listaDados[i + 1] + 1 == listaDados[i + 2]
+					&& listaDados[i + 2] + 1 == listaDados[i + 3]) {
 				total = 30;
 			}
 		}
@@ -322,8 +325,8 @@ public class Tabela {
 		int[] listaDados = { dado1, dado2, dado3, dado4, dado5 };
 
 		for (int i = 0; i < listaDados.length - 4; i++) {
-			if (listaDados[i] + 1 == listaDados[i + 1] && listaDados[i] + 2 == listaDados[i + 2]
-					&& listaDados[i] + 3 == listaDados[i + 3] && listaDados[i] + 4 == listaDados[i + 4]) {
+			if (listaDados[i] + 1 == listaDados[i + 1] && listaDados[i + 1] + 1 == listaDados[i + 2]
+					&& listaDados[i + 2] + 1 == listaDados[i + 3] && listaDados[i + 3] + 1 == listaDados[i + 4]) {
 				total = 40;
 			}
 		}
@@ -353,11 +356,12 @@ public class Tabela {
 	}
 
 	public int total1() {
-		return (ones + twos + threes + fours + fives + sixes);
+		return (getOnes() + getTwos() + getThrees() + getFours() + getFives() + getSixes());
 	}
 
 	public int totalFinal() {
-		return (getTotal1() + tresIguais + quatroIguais + fullHouse + sequenciaMaior + sequenciaMenor + somaDeTodos
-				+ yahtzee);
+		return (getTotal1() + getTresIguais() + getQuatroIguais() + getFullHouse() + getSequenciaMaior()
+				+ getSequenciaMenor() + getYahtzee());
 	}
+
 }
