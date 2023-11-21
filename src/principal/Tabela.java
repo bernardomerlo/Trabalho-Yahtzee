@@ -163,67 +163,67 @@ public class Tabela {
 		System.out.println("Yahtzee: " + getYahtzee());
 	}
 
-	public void ones(Dados[] dados) {
+	public int ones(Dados[] dados) {
 		int total = 0;
 		for (Dados d : dados) {
 			if (d.getNumFace() == 1) {
 				total += d.getNumFace();
 			}
 		}
-		setOnes(total);
+		return total;
 	}
 
-	public void twos(Dados[] dados) {
+	public int twos(Dados[] dados) {
 		int total = 0;
 		for (Dados d : dados) {
 			if (d.getNumFace() == 2) {
 				total += d.getNumFace();
 			}
 		}
-		setTwos(total);
+		return total;
 	}
 
-	public void threes(Dados[] dados) {
+	public int threes(Dados[] dados) {
 		int total = 0;
 		for (Dados d : dados) {
 			if (d.getNumFace() == 3) {
 				total += d.getNumFace();
 			}
 		}
-		setThrees(total);
+		return total;
 	}
 
-	public void fours(Dados[] dados) {
+	public int fours(Dados[] dados) {
 		int total = 0;
 		for (Dados d : dados) {
 			if (d.getNumFace() == 4) {
 				total += d.getNumFace();
 			}
 		}
-		setFours(total);
+		return total;
 	}
 
-	public void fives(Dados[] dados) {
+	public int fives(Dados[] dados) {
 		int total = 0;
 		for (Dados d : dados) {
 			if (d.getNumFace() == 5) {
 				total += d.getNumFace();
 			}
 		}
-		setFives(total);
+		return total;
 	}
 
-	public void sixes(Dados[] dados) {
+	public int sixes(Dados[] dados) {
 		int total = 0;
 		for (Dados d : dados) {
 			if (d.getNumFace() == 6) {
 				total += d.getNumFace();
 			}
 		}
-		setSixes(total);
+		return total;
 	}
 
-	public void tresIguais(Dados[] dados) {
+	public int tresIguais(Dados[] dados) {
 		int total = 0;
 		int dado1 = dados[0].getNumFace();
 		int dado2 = dados[1].getNumFace();
@@ -239,10 +239,10 @@ public class Tabela {
 			total = dado1 + dado2 + dado3 + dado4 + dado5;
 		}
 
-		setTresIguais(total);
+		return total;
 	}
 
-	public void quatroIguais(Dados[] dados) {
+	public int quatroIguais(Dados[] dados) {
 		int total = 0;
 		int dado1 = dados[0].getNumFace();
 		int dado2 = dados[1].getNumFace();
@@ -256,10 +256,10 @@ public class Tabela {
 				|| (dado2 == dado3 && dado3 == dado4 && dado4 == dado5)) {
 			total = dado1 + dado2 + dado3 + dado4 + dado5;
 		}
-		setQuatroIguais(total);
+		return total;
 	}
 
-	public void fullHouse(Dados[] dados) {
+	public int fullHouse(Dados[] dados) {
 		int total = 0;
 		int dado1 = dados[0].getNumFace();
 		int dado2 = dados[1].getNumFace();
@@ -291,10 +291,10 @@ public class Tabela {
 				total = 25;
 			}
 		}
-		setFullHouse(total);
+		return total;
 	}
 
-	public void sequenciaMenor(Dados[] dados) {
+	public int sequenciaMenor(Dados[] dados) {
 		int total = 0;
 		int dado1 = dados[0].getNumFace();
 		int dado2 = dados[1].getNumFace();
@@ -309,10 +309,10 @@ public class Tabela {
 				total = 30;
 			}
 		}
-		setSequenciaMenor(total);
+		return total;
 	}
 
-	public void sequenciaMaior(Dados[] dados) {
+	public int sequenciaMaior(Dados[] dados) {
 		int total = 0;
 		int dado1 = dados[0].getNumFace();
 		int dado2 = dados[1].getNumFace();
@@ -327,35 +327,37 @@ public class Tabela {
 				total = 40;
 			}
 		}
-		setSequenciaMaior(total);
+		return total;
 	}
 
-	public void somaDeTodos(Dados[] dados) {
-		setSomaDeTodos(dados[0].getNumFace() + dados[1].getNumFace() + dados[2].getNumFace() + dados[3].getNumFace()
+	public int somaDeTodos(Dados[] dados) {
+		return (dados[0].getNumFace() + dados[1].getNumFace() + dados[2].getNumFace() + dados[3].getNumFace()
 				+ dados[4].getNumFace());
 	}
 
-	public void yahtzee(Dados[] dados) {
+	public int yahtzee(Dados[] dados) {
 		int total = 0;
 		if (dados[0].getNumFace() == dados[1].getNumFace() && dados[1].getNumFace() == dados[2].getNumFace()
 				&& dados[2].getNumFace() == dados[3].getNumFace() && dados[3].getNumFace() == dados[4].getNumFace()) {
 			total = 50;
 		}
-		setYahtzee(total);
+		return total;
 	}
 
-	public void bonus() {
+	public int bonus() {
 		if (getTotal1() >= 63) {
-			setTotal1(total1 += 35);
+			return (total1 += 35);
+		} else {
+			return 0;
 		}
 	}
 
-	public void total1() {
-		setTotal1(ones + twos + threes + fours + fives + sixes);
+	public int total1() {
+		return (ones + twos + threes + fours + fives + sixes);
 	}
 
-	public void totalFinal() {
-		setTotalFinal(getTotal1() + tresIguais + quatroIguais + fullHouse + sequenciaMaior + sequenciaMenor
-				+ somaDeTodos + yahtzee);
+	public int totalFinal() {
+		return (getTotal1() + tresIguais + quatroIguais + fullHouse + sequenciaMaior + sequenciaMenor + somaDeTodos
+				+ yahtzee);
 	}
 }
