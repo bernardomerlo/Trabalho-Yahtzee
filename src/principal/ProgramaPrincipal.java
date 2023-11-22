@@ -20,7 +20,7 @@ public class ProgramaPrincipal {
 		Tabela tabelaJogador2 = new Tabela();
 		jogador2.setT(tabelaJogador2);
 
-		for (int jgdores = 1; jgdores < 4; jgdores++) {
+		for (int jgdores = 1; jgdores < 26; jgdores++) {
 			Jogador jogador;
 			if (jgdores % 2 == 1) {
 				jogador = jogador1;
@@ -76,13 +76,7 @@ public class ProgramaPrincipal {
 				}
 			}
 
-			Tabela t;
-
-			if (jgdores % 2 == 1) {
-				t = tabelaJogador1;
-			} else {
-				t = tabelaJogador2;
-			}
+			Tabela t = jogador.getT();
 
 			Dados d1Final = new Dados();
 			Dados d2Final = new Dados();
@@ -122,25 +116,8 @@ public class ProgramaPrincipal {
 			for (Dados d : dadosFinal) {
 				System.out.println(d.getNumFace());
 			}
-			System.out.println();
 
-			System.out.println("=======TABELA=======\n");
-			System.out.println("1-ONES = " + t.ones(dadosFinal));
-			System.out.println("2-TWOS = " + t.twos(dadosFinal));
-			System.out.println("3-THREES = " + t.threes(dadosFinal));
-			System.out.println("4-FOURS = " + t.fours(dadosFinal));
-			System.out.println("5-FIVES = " + t.fives(dadosFinal));
-			System.out.println("6-SIXES = " + t.sixes(dadosFinal));
-			System.out.println("TOTAL TEMPORARIO = " + t.getTotal1());
-
-			System.out.println("7-THREE OF A KIND = " + t.tresIguais(dadosFinal));
-			System.out.println("8-FOUR OF A KIND = " + t.quatroIguais(dadosFinal));
-			System.out.println("9-FULL HOUSE = " + t.fullHouse(dadosFinal));
-			System.out.println("10-SEQUENCIA MENOR = " + t.sequenciaMenor(dadosFinal));
-			System.out.println("11-SEQUENCIA MAIOR = " + t.sequenciaMaior(dadosFinal));
-			System.out.println("12-SORTE = " + t.somaDeTodos(dadosFinal));
-			System.out.println("13-YAHTZEE = " + t.yahtzee(dadosFinal));
-			System.out.println("");
+			mostrarTabela(t, dadosFinal);
 
 			System.out.println("Digite o que voce deseja atribuir: ");
 			int escolhaAtribuir = sc.nextInt();
@@ -158,68 +135,113 @@ public class ProgramaPrincipal {
 			}
 			case 3: {
 				t.setThrees(t.threes(dadosFinal));
-				System.out.println("3-THREES = " + t.threes(dadosFinal));
+				System.out.println("3-THREES = " + t.getThrees());
 				break;
 			}
 			case 4: {
 				t.setFours(t.fours(dadosFinal));
-				System.out.println("4-FOURS = " + t.fours(dadosFinal));
+				System.out.println("4-FOURS = " + t.getFours());
 				break;
 			}
 			case 5: {
 				t.setFives(t.fives(dadosFinal));
-				System.out.println("5-FIVES = " + t.fives(dadosFinal));
+				System.out.println("5-FIVES = " + t.getFives());
 				break;
 			}
 			case 6: {
 				t.setSixes(t.sixes(dadosFinal));
-				System.out.println("6-SIXES = " + t.sixes(dadosFinal));
+				System.out.println("6-SIXES = " + t.getSixes());
 				break;
 			}
 			case 7: {
 				t.setTresIguais(t.tresIguais(dadosFinal));
-				System.out.println("7-THREE OF A KIND = " + t.tresIguais(dadosFinal));
+				System.out.println("7-THREE OF A KIND = " + t.getTresIguais());
 				break;
 			}
 			case 8: {
 				t.setQuatroIguais(t.quatroIguais(dadosFinal));
-				System.out.println("8-FOUR OF A KIND = " + t.quatroIguais(dadosFinal));
+				System.out.println("8-FOUR OF A KIND = " + t.getQuatroIguais());
 				break;
 			}
 			case 9: {
 				t.setFullHouse(t.fullHouse(dadosFinal));
-				System.out.println("9-FULL HOUSE = " + t.fullHouse(dadosFinal));
+				System.out.println("9-FULL HOUSE = " + t.getFullHouse());
 				break;
 			}
 			case 10: {
 				t.setSequenciaMenor(t.sequenciaMenor(dadosFinal));
-				System.out.println("10-SEQUENCIA MENOR = " + t.sequenciaMenor(dadosFinal));
+				System.out.println("10-SEQUENCIA MENOR = " + t.getSequenciaMenor());
 				break;
 			}
 			case 11: {
 				t.setSequenciaMaior(t.sequenciaMaior(dadosFinal));
-				System.out.println("11-SEQUENCIA MAIOR = " + t.sequenciaMaior(dadosFinal));
+				System.out.println("11-SEQUENCIA MAIOR = " + t.getSequenciaMaior());
 				break;
 			}
 			case 12: {
 				t.setSomaDeTodos(t.somaDeTodos(dadosFinal));
-				System.out.println("12-SORTE = " + t.somaDeTodos(dadosFinal));
+				System.out.println("12-SORTE = " + t.getSomaDeTodos());
 				break;
 			}
 			case 13: {
 				t.setYahtzee(t.yahtzee(dadosFinal));
-				System.out.println("13-YAHTZEE = " + t.yahtzee(dadosFinal));
+				System.out.println("13-YAHTZEE = " + t.getYahtzee());
 				break;
 			}
 			}
+
+			mostraTabelaAtualizada(t);
+
 			restaurarDados(dadosIniciais, d1, d2, d3, d4, d5);
 
 		}
 		sc.close();
 
 		System.out.println("FINAL");
-		System.out.println("JOGADOR 1 = " + tabelaJogador1.getTotalFinal());
-		System.out.println("JOGADOR 2 = " + tabelaJogador2.getTotalFinal());
+		System.out.println("JOGADOR 1 = " + tabelaJogador1.calcularPontosTotal());
+		System.out.println("JOGADOR 2 = " + tabelaJogador2.calcularPontosTotal());
+	}
+
+	private static void mostraTabelaAtualizada(Tabela t) {
+		System.out.println();
+		System.out.println("=======TABELA FINAL=======\n");
+		System.out.println("1-ONES = " + t.getOnes());
+		System.out.println("2-TWOS = " + t.getTwos());
+		System.out.println("3-THREES = " + t.getThrees());
+		System.out.println("4-FOURS = " + t.getFours());
+		System.out.println("5-FIVES = " + t.getFives());
+		System.out.println("6-SIXES = " + t.getSixes());
+		System.out.println("TOTAL TEMPORARIO = " + t.getTotal1());
+		System.out.println();
+		System.out.println("7-THREE OF A KIND = " + t.getTresIguais());
+		System.out.println("8-FOUR OF A KIND = " + t.getQuatroIguais());
+		System.out.println("9-FULL HOUSE = " + t.getFullHouse());
+		System.out.println("10-SEQUENCIA MENOR = " + t.getSequenciaMenor());
+		System.out.println("11-SEQUENCIA MAIOR = " + t.getSequenciaMaior());
+		System.out.println("12-SORTE = " + t.getSomaDeTodos());
+		System.out.println("13-YAHTZEE = " + t.getYahtzee());
+		System.out.println();
+	}
+
+	private static void mostrarTabela(Tabela t, Dados[] dadosFinal) {
+		System.out.println();
+		System.out.println("=======TABELA DE ESCOLHA=======\n");
+		System.out.println("1-ONES = " + t.ones(dadosFinal));
+		System.out.println("2-TWOS = " + t.twos(dadosFinal));
+		System.out.println("3-THREES = " + t.threes(dadosFinal));
+		System.out.println("4-FOURS = " + t.fours(dadosFinal));
+		System.out.println("5-FIVES = " + t.fives(dadosFinal));
+		System.out.println("6-SIXES = " + t.sixes(dadosFinal));
+		System.out.println("TOTAL TEMPORARIO = " + t.getTotal1());
+		System.out.println();
+		System.out.println("7-THREE OF A KIND = " + t.tresIguais(dadosFinal));
+		System.out.println("8-FOUR OF A KIND = " + t.quatroIguais(dadosFinal));
+		System.out.println("9-FULL HOUSE = " + t.fullHouse(dadosFinal));
+		System.out.println("10-SEQUENCIA MENOR = " + t.sequenciaMenor(dadosFinal));
+		System.out.println("11-SEQUENCIA MAIOR = " + t.sequenciaMaior(dadosFinal));
+		System.out.println("12-SORTE = " + t.somaDeTodos(dadosFinal));
+		System.out.println("13-YAHTZEE = " + t.yahtzee(dadosFinal));
+		System.out.println();
 	}
 
 	public static void restaurarDados(Dados[] dados, Dados d1, Dados d2, Dados d3, Dados d4, Dados d5) {

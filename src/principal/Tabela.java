@@ -130,7 +130,7 @@ public class Tabela {
 	}
 
 	public void setTotal1(int total1) {
-		this.total1 = total1;
+		this.total1 = total1 + ones + twos + threes + fours + fives + sixes + bonus;
 	}
 
 	public int getBonus() {
@@ -355,13 +355,17 @@ public class Tabela {
 		}
 	}
 
-	public int total1() {
-		return (getOnes() + getTwos() + getThrees() + getFours() + getFives() + getSixes());
+	public int calcularSoma1() {
+		int totalParcial = ones + twos + threes + fours + fives + sixes + bonus;
+		setTotal1(totalParcial);
+		return totalParcial;
 	}
 
-	public int totalFinal() {
-		return (getTotal1() + getTresIguais() + getQuatroIguais() + getFullHouse() + getSequenciaMaior()
-				+ getSequenciaMenor() + getYahtzee());
+	public int calcularPontosTotal() {
+		int totalFinal = ones + twos + threes + fours + fives + sixes + bonus + tresIguais + quatroIguais + fullHouse
+				+ sequenciaMenor + sequenciaMaior + somaDeTodos + yahtzee;
+		setTotalFinal(totalFinal);
+		return totalFinal;
 	}
 
 }

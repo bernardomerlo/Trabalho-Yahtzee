@@ -5,7 +5,6 @@ import java.util.Random;
 public class Dados {
 	private int numFace;
 	private int posVetor;
-	private boolean salvo;
 
 	public int getNumFace() {
 		return numFace;
@@ -26,14 +25,6 @@ public class Dados {
 
 	public void setPosVetor(int posVetor) {
 		this.posVetor = posVetor;
-	}
-
-	public boolean isSalvo() {
-		return salvo;
-	}
-
-	public void setSalvo(boolean salvo) {
-		this.salvo = salvo;
 	}
 
 }
