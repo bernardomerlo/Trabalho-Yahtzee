@@ -232,7 +232,7 @@ public class ProgramaPrincipal {
 		System.out.println("4-FOURS = " + t.fours(dadosFinal));
 		System.out.println("5-FIVES = " + t.fives(dadosFinal));
 		System.out.println("6-SIXES = " + t.sixes(dadosFinal));
-		System.out.println("TOTAL TEMPORARIO = " + t.getTotal1());
+
 		System.out.println();
 		System.out.println("7-THREE OF A KIND = " + t.tresIguais(dadosFinal));
 		System.out.println("8-FOUR OF A KIND = " + t.quatroIguais(dadosFinal));

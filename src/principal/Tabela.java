@@ -323,6 +323,7 @@ public class Tabela {
 		int dado4 = dados[3].getNumFace();
 		int dado5 = dados[4].getNumFace();
 		int[] listaDados = { dado1, dado2, dado3, dado4, dado5 };
+		Arrays.sort(listaDados);
 
 		for (int i = 0; i < listaDados.length - 4; i++) {
 			if (listaDados[i] + 1 == listaDados[i + 1] && listaDados[i + 1] + 1 == listaDados[i + 2]
