@@ -306,7 +306,7 @@ public class Tabela {
 		int[] listaDados = { dado1, dado2, dado3, dado4, dado5 };
 		Arrays.sort(listaDados);
 
-		for (int i = 0; i < listaDados.length - 3; i++) {
+		for (int i = 0; i < listaDados.length - 4; i++) {
 			if (listaDados[i] + 1 == listaDados[i + 1] && listaDados[i + 1] + 1 == listaDados[i + 2]
 					&& listaDados[i + 2] + 1 == listaDados[i + 3]) {
 				total = 30;

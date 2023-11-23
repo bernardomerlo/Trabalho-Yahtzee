@@ -1,6 +1,8 @@
 package principal;
 
-import java.io.File;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ProgramaPrincipal {
@@ -14,16 +16,14 @@ public class ProgramaPrincipal {
 		Jogador jogador1 = new Jogador(nome);
 		Tabela tabelaJogador1 = new Tabela();
 		jogador1.setT(tabelaJogador1);
-		File jogador1txt = new File("C:\\jogador1.txt");
 
 		System.out.println("Digite o nome do jogador n2: ");
 		String nome2 = sc.nextLine();
 		Jogador jogador2 = new Jogador(nome2);
 		Tabela tabelaJogador2 = new Tabela();
 		jogador2.setT(tabelaJogador2);
-		File jogador2txt = new File("C:\\jogador2.txt");
 
-		for (int jgdores = 1; jgdores < 5; jgdores++) {
+		for (int jgdores = 1; jgdores < 3; jgdores++) {
 			Jogador jogador;
 			if (jgdores % 2 == 1) {
 				jogador = jogador1;
@@ -200,10 +200,13 @@ public class ProgramaPrincipal {
 		}
 		sc.close();
 
-		Editor editor = new Editor(jogador1, jogador2);
-		editor.escreverJogador1();
-		editor.escreverJogador2();
+		System.out.println("TOTAL");
 
+		System.out.println("Jogador 1 = " + jogador1.getT().calcularPontosTotal());
+		System.out.println("Jogador 2 = " + jogador2.getT().calcularPontosTotal());
+
+		escrever(jogador1);
+		escrever(jogador2);
 	}
 
 	private static void mostraTabelaAtualizada(Tabela t) {
@@ -254,6 +257,30 @@ public class ProgramaPrincipal {
 		dados[2] = d3;
 		dados[3] = d4;
 		dados[4] = d5;
+	}
 
+	public static void escrever(Jogador jogador) {
+		String caminho = "c:\\temp\\saida.txt";
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminho))) {
+			bw.write("Jogador: " + jogador.getNome());
+			bw.write("\n1s: " + jogador.getT().getOnes() + "p\n");
+			bw.write("2s: " + jogador.getT().getTwos() + "p\n");
+			bw.write("3s: " + jogador.getT().getThrees() + "p\n");
+			bw.write("4s: " + jogador.getT().getFours() + "p\n");
+			bw.write("5s: " + jogador.getT().getFives() + "p\n");
+			bw.write("6s: " + jogador.getT().getSixes() + "p\n");
+			bw.write("Bônus: " + jogador.getT().getBonus() + "p\n");
+			bw.write("Trinca: " + jogador.getT().getTresIguais() + "p\n");
+			bw.write("Quadra: " + jogador.getT().getQuatroIguais() + "p\n");
+			bw.write("FullHouse: " + jogador.getT().getFullHouse() + "p\n");
+			bw.write("Sequência Menor: " + jogador.getT().getSequenciaMenor() + "p\n");
+			bw.write("Sequência Maior: " + jogador.getT().getSequenciaMaior() + "p\n");
+			bw.write("Soma de Todos: " + jogador.getT().getSomaDeTodos() + "p\n");
+			bw.write("Yahtzee: " + jogador.getT().getYahtzee() + "p\n");
+			bw.write("Total Final " + jogador.getT().getTotalFinal() + "p\n");
+			System.out.println("RODOU");
+		} catch (IOException erroEscrita1) {
+			System.out.println("Erro: " + erroEscrita1.getMessage());
+		}
 	}
 }
