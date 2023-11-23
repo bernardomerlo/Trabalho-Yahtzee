@@ -1,5 +1,6 @@
 package principal;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class ProgramaPrincipal {
@@ -13,14 +14,16 @@ public class ProgramaPrincipal {
 		Jogador jogador1 = new Jogador(nome);
 		Tabela tabelaJogador1 = new Tabela();
 		jogador1.setT(tabelaJogador1);
+		File jogador1txt = new File("C:\\jogador1.txt");
 
 		System.out.println("Digite o nome do jogador n2: ");
 		String nome2 = sc.nextLine();
 		Jogador jogador2 = new Jogador(nome2);
 		Tabela tabelaJogador2 = new Tabela();
 		jogador2.setT(tabelaJogador2);
+		File jogador2txt = new File("C:\\jogador2.txt");
 
-		for (int jgdores = 1; jgdores < 26; jgdores++) {
+		for (int jgdores = 1; jgdores < 5; jgdores++) {
 			Jogador jogador;
 			if (jgdores % 2 == 1) {
 				jogador = jogador1;
@@ -197,9 +200,10 @@ public class ProgramaPrincipal {
 		}
 		sc.close();
 
-		System.out.println("FINAL");
-		System.out.println("JOGADOR 1 = " + tabelaJogador1.calcularPontosTotal());
-		System.out.println("JOGADOR 2 = " + tabelaJogador2.calcularPontosTotal());
+		Editor editor = new Editor(jogador1, jogador2);
+		editor.escreverJogador1();
+		editor.escreverJogador2();
+
 	}
 
 	private static void mostraTabelaAtualizada(Tabela t) {
