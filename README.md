@@ -1,14 +1,14 @@
 Bem-vindo ao repositório do jogo Yahtzee em Java! Este é um clássico jogo de dados que desafia sua sorte e estratégia. Siga as instruções abaixo para começar a jogar.
-  Trabalho feito em grupo na disciplina de Laboratório de Programação II com o objetivo de aprimorar as habilidades em Java e trabalho em grupo.
+
+Trabalho feito em grupo na disciplina de Laboratório de Programação II com o objetivo de aprimorar as habilidades em Java e trabalho em grupo.
 
 # Yahtzee Game
-  ## Como Jogar Yahtzee
-    ### Requisitos
-    Certifique-se de ter o seguinte instalado em sua máquina:
-    - Java Development Kit (JDK)
+## Como Jogar Yahtzee
+### Requisitos
+Certifique-se de ter o seguinte instalado em sua máquina:
+- Java Development Kit (JDK)
 
-    ### Configuração
-
+### Configuração
 1. Clone o repositório para a sua máquina:
 git clone https://github.com/seu-usuario/yahtzee-game-java.git
 
