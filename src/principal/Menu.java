@@ -30,6 +30,7 @@ public class Menu {
 
 		for (int jgdores = 1; jgdores < 3; jgdores++) {
 			Jogador jogador;
+			// se o mod do index do for == 1, é a vez do jogador1 se nao, do jogador2
 			if (jgdores % 2 == 1) {
 				jogador = jogador1;
 			} else {
@@ -37,6 +38,8 @@ public class Menu {
 			}
 
 			System.out.println("Vez do Jogador " + jogador.getNome());
+			System.out.println();
+
 			Dados[] dadosIniciais = new Dados[5];
 			Dados[] dadosAux = new Dados[5];
 
@@ -49,33 +52,59 @@ public class Menu {
 			restaurarDados(dadosIniciais, d1, d2, d3, d4, d5);
 
 			for (int rodadas = 0; rodadas < 3; rodadas++) {
-				for (int i = 0; i < dadosIniciais.length; i++) {
-					if (dadosIniciais[i] != null) {
-						dadosIniciais[i].rolar();
-						System.out.println("Face do dado (" + i + "): " + dadosIniciais[i].getNumFace());
+				// se todos os valores do vetor dadosAux tiverem preenchidos, entao o for acaba
+				if (dadosAux[0] != null && dadosAux[1] != null && dadosAux[2] != null && dadosAux[3] != null
+						&& dadosAux[4] != null) {
+					rodadas = 3;
+				}
 
+				// se a variavel jgdores for maior que 1, consome a quebra de linha que falta
+				if (jgdores > 1) {
+					sc.nextLine();
+				}
+
+				// pergunta se o jogador quer ver a tabela dele na primeira rodada
+				if (rodadas == 0) {
+					System.out.print("\nMostra sua tabela? (s/n) ");
+					String mostraTabela = sc.nextLine().toLowerCase();
+					if (mostraTabela.equals("s")) {
+						mostraTabelaAtualizada(jogador.getT());
 					}
 				}
 
-				System.out.println("Vai salvar algum? ");
-				char escolha = sc.next().charAt(0);
+				// mostra os dados que ele pode selecionar para manter
+				System.out.println("\n====================");
+				for (int i = 0; i < dadosIniciais.length; i++) {
+					if (dadosIniciais[i] != null) {
+						dadosIniciais[i].rolar();
+						System.out.println("Face do dado(" + i + "): " + dadosIniciais[i].getNumFace());
+					}
+				}
+				System.out.println("====================");
+
+				// seleçao de dados
+				System.out.print("Vai salvar algum? (s/n) ");
+				char escolha = sc.next().toLowerCase().charAt(0);
 				if (escolha == 's') {
-					System.out.println("Quantos? ");
+					System.out.print("Quantos? (1-5) ");
 					int tamanhoVetor = sc.nextInt();
+
+					// se o jogador salvar 5 dados, fecha o for na hora
+					if (tamanhoVetor == 5) {
+						break;
+					}
 					for (int j = 0; j < tamanhoVetor; j++) {
-						System.out.println("Qual? ");
+						System.out.print("Qual? (0-4) ");
 						int indexDado = sc.nextInt();
 						dadosAux[indexDado] = dadosIniciais[indexDado];
 						dadosIniciais[indexDado] = null;
-						System.out.println("DADO DA POSICAO " + indexDado + " SALVO");
 					}
-					System.out.println("Faces dos dados Mantidos");
+					System.out.println("\nFaces dos dados Mantidos");
 					for (Dados d : dadosAux) {
 						if (d != null)
 							System.out.println(d.getNumFace());
 					}
 					System.out.println();
-
 				}
 			}
 
@@ -125,73 +154,7 @@ public class Menu {
 			System.out.println("Digite o que voce deseja atribuir: ");
 			int escolhaAtribuir = sc.nextInt();
 
-			switch (escolhaAtribuir) {
-			case 1: {
-				t.setOnes(t.ones(dadosFinal));
-				System.out.println("1-ONES = " + t.getOnes());
-				break;
-			}
-			case 2: {
-				t.setTwos(t.twos(dadosFinal));
-				System.out.println("2-TWOS = " + t.getTwos());
-				break;
-			}
-			case 3: {
-				t.setThrees(t.threes(dadosFinal));
-				System.out.println("3-THREES = " + t.getThrees());
-				break;
-			}
-			case 4: {
-				t.setFours(t.fours(dadosFinal));
-				System.out.println("4-FOURS = " + t.getFours());
-				break;
-			}
-			case 5: {
-				t.setFives(t.fives(dadosFinal));
-				System.out.println("5-FIVES = " + t.getFives());
-				break;
-			}
-			case 6: {
-				t.setSixes(t.sixes(dadosFinal));
-				System.out.println("6-SIXES = " + t.getSixes());
-				break;
-			}
-			case 7: {
-				t.setTresIguais(t.tresIguais(dadosFinal));
-				System.out.println("7-THREE OF A KIND = " + t.getTresIguais());
-				break;
-			}
-			case 8: {
-				t.setQuatroIguais(t.quatroIguais(dadosFinal));
-				System.out.println("8-FOUR OF A KIND = " + t.getQuatroIguais());
-				break;
-			}
-			case 9: {
-				t.setFullHouse(t.fullHouse(dadosFinal));
-				System.out.println("9-FULL HOUSE = " + t.getFullHouse());
-				break;
-			}
-			case 10: {
-				t.setSequenciaMenor(t.sequenciaMenor(dadosFinal));
-				System.out.println("10-SEQUENCIA MENOR = " + t.getSequenciaMenor());
-				break;
-			}
-			case 11: {
-				t.setSequenciaMaior(t.sequenciaMaior(dadosFinal));
-				System.out.println("11-SEQUENCIA MAIOR = " + t.getSequenciaMaior());
-				break;
-			}
-			case 12: {
-				t.setSomaDeTodos(t.somaDeTodos(dadosFinal));
-				System.out.println("12-SORTE = " + t.getSomaDeTodos());
-				break;
-			}
-			case 13: {
-				t.setYahtzee(t.yahtzee(dadosFinal));
-				System.out.println("13-YAHTZEE = " + t.getYahtzee());
-				break;
-			}
-			}
+			escolha(escolhaAtribuir, jogador.getT(), dadosFinal);
 
 			mostraTabelaAtualizada(t);
 
@@ -205,7 +168,6 @@ public class Menu {
 
 		escrever(jogador1);
 		escrever(jogador2);
-
 	}
 
 	public static void restaurarDados(Dados[] dados, Dados d1, Dados d2, Dados d3, Dados d4, Dados d5) {
@@ -279,5 +241,76 @@ public class Menu {
 		} catch (IOException erroEscrita1) {
 			System.out.println("Erro: " + erroEscrita1.getMessage());
 		}
+	}
+
+	public void escolha(int escolhaAtribuir, Tabela t, Dados[] dadosFinal) {
+		switch (escolhaAtribuir) {
+		case 1: {
+			t.setOnes(t.ones(dadosFinal));
+			System.out.println("1-ONES = " + t.getOnes());
+			break;
+		}
+		case 2: {
+			t.setTwos(t.twos(dadosFinal));
+			System.out.println("2-TWOS = " + t.getTwos());
+			break;
+		}
+		case 3: {
+			t.setThrees(t.threes(dadosFinal));
+			System.out.println("3-THREES = " + t.getThrees());
+			break;
+		}
+		case 4: {
+			t.setFours(t.fours(dadosFinal));
+			System.out.println("4-FOURS = " + t.getFours());
+			break;
+		}
+		case 5: {
+			t.setFives(t.fives(dadosFinal));
+			System.out.println("5-FIVES = " + t.getFives());
+			break;
+		}
+		case 6: {
+			t.setSixes(t.sixes(dadosFinal));
+			System.out.println("6-SIXES = " + t.getSixes());
+			break;
+		}
+		case 7: {
+			t.setTresIguais(t.tresIguais(dadosFinal));
+			System.out.println("7-THREE OF A KIND = " + t.getTresIguais());
+			break;
+		}
+		case 8: {
+			t.setQuatroIguais(t.quatroIguais(dadosFinal));
+			System.out.println("8-FOUR OF A KIND = " + t.getQuatroIguais());
+			break;
+		}
+		case 9: {
+			t.setFullHouse(t.fullHouse(dadosFinal));
+			System.out.println("9-FULL HOUSE = " + t.getFullHouse());
+			break;
+		}
+		case 10: {
+			t.setSequenciaMenor(t.sequenciaMenor(dadosFinal));
+			System.out.println("10-SEQUENCIA MENOR = " + t.getSequenciaMenor());
+			break;
+		}
+		case 11: {
+			t.setSequenciaMaior(t.sequenciaMaior(dadosFinal));
+			System.out.println("11-SEQUENCIA MAIOR = " + t.getSequenciaMaior());
+			break;
+		}
+		case 12: {
+			t.setSomaDeTodos(t.somaDeTodos(dadosFinal));
+			System.out.println("12-SORTE = " + t.getSomaDeTodos());
+			break;
+		}
+		case 13: {
+			t.setYahtzee(t.yahtzee(dadosFinal));
+			System.out.println("13-YAHTZEE = " + t.getYahtzee());
+			break;
+		}
+		}
+
 	}
 }
