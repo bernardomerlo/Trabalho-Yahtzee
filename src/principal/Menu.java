@@ -1,8 +1,7 @@
 package principal;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Menu {
@@ -12,10 +11,12 @@ public class Menu {
 		System.out.println("=====MENU=====");
 		System.out.println("1 - Jogar");
 		System.out.println("2 - Mostrar resultados anteriores");
-		System.out.println("3 - Sair");
+		System.out.println("3 - Mostrar jogadores cadastrados");
+		System.out.println("4 - Cadastrar jogador(es)");
+		System.out.println("5 - Sair");
 	}
 
-	public void jogar() {
+	public void jogar(Arquivos a) {
 		System.out.println("Digite o nome do jogador n1: ");
 		String nome = sc.nextLine();
 		Jogador jogador1 = new Jogador(nome);
@@ -27,6 +28,8 @@ public class Menu {
 		Jogador jogador2 = new Jogador(nome2);
 		Tabela tabelaJogador2 = new Tabela();
 		jogador2.setT(tabelaJogador2);
+
+		a.cadastrarJogadores(new ArrayList<Jogador>(Arrays.asList(new Jogador[] { jogador1, jogador2 })));
 
 		for (int jgdores = 1; jgdores < 3; jgdores++) {
 			Jogador jogador;
@@ -163,11 +166,11 @@ public class Menu {
 		}
 
 		System.out.println("TOTAL");
-		System.out.println("Jogador 1 = " + jogador1.getT().calcularPontosTotal());
-		System.out.println("Jogador 2 = " + jogador2.getT().calcularPontosTotal());
+		System.out.println("Jogador = " + jogador1.getNome() + " " + jogador1.getT().calcularPontosTotal());
+		System.out.println("Jogador = " + jogador2.getNome() + " " + jogador2.getT().calcularPontosTotal());
 
-		escrever(jogador1);
-		escrever(jogador2);
+		a.escreverTabela(jogador1);
+		a.escreverTabela(jogador2);
 	}
 
 	public static void restaurarDados(Dados[] dados, Dados d1, Dados d2, Dados d3, Dados d4, Dados d5) {
@@ -208,6 +211,9 @@ public class Menu {
 		System.out.println("4-FOURS = " + t.fours(dadosFinal));
 		System.out.println("5-FIVES = " + t.fives(dadosFinal));
 		System.out.println("6-SIXES = " + t.sixes(dadosFinal));
+		if (t.getBonus() > 0) {
+			System.out.println("BONUS = " + t.getBonus());
+		}
 		System.out.println();
 		System.out.println("7-THREE OF A KIND = " + t.tresIguais(dadosFinal));
 		System.out.println("8-FOUR OF A KIND = " + t.quatroIguais(dadosFinal));
@@ -217,30 +223,6 @@ public class Menu {
 		System.out.println("12-SORTE = " + t.somaDeTodos(dadosFinal));
 		System.out.println("13-YAHTZEE = " + t.yahtzee(dadosFinal));
 		System.out.println();
-	}
-
-	public static void escrever(Jogador jogador) {
-		String caminho = "c:\\temp\\saida.txt";
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminho, true))) {
-			bw.write("Jogador: " + jogador.getNome() + "\n");
-			bw.write("1s: " + jogador.getT().getOnes() + "p\n");
-			bw.write("2s: " + jogador.getT().getTwos() + "p\n");
-			bw.write("3s: " + jogador.getT().getThrees() + "p\n");
-			bw.write("4s: " + jogador.getT().getFours() + "p\n");
-			bw.write("5s: " + jogador.getT().getFives() + "p\n");
-			bw.write("6s: " + jogador.getT().getSixes() + "p\n");
-			bw.write("Bônus: " + jogador.getT().getBonus() + "p\n");
-			bw.write("Trinca: " + jogador.getT().getTresIguais() + "p\n");
-			bw.write("Quadra: " + jogador.getT().getQuatroIguais() + "p\n");
-			bw.write("FullHouse: " + jogador.getT().getFullHouse() + "p\n");
-			bw.write("Sequência Menor: " + jogador.getT().getSequenciaMenor() + "p\n");
-			bw.write("Sequência Maior: " + jogador.getT().getSequenciaMaior() + "p\n");
-			bw.write("Soma de Todos: " + jogador.getT().getSomaDeTodos() + "p\n");
-			bw.write("Yahtzee: " + jogador.getT().getYahtzee() + "p\n");
-			bw.write("Total Final: " + jogador.getT().getTotalFinal() + "p\n");
-		} catch (IOException erroEscrita1) {
-			System.out.println("Erro: " + erroEscrita1.getMessage());
-		}
 	}
 
 	public void escolha(int escolhaAtribuir, Tabela t, Dados[] dadosFinal) {
@@ -313,4 +295,5 @@ public class Menu {
 		}
 
 	}
+
 }
