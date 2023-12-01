@@ -17,19 +17,61 @@ public class Menu {
 	}
 
 	public void jogar(Arquivos a) {
-		System.out.println("Digite o nome do jogador n1: ");
-		String nome = sc.nextLine();
-		Jogador jogador1 = new Jogador(nome);
-		Tabela tabelaJogador1 = new Tabela();
-		jogador1.setT(tabelaJogador1);
+		JogadoresCadastrados jg = new JogadoresCadastrados();
+		jg.atualizarJogadores(a);
+		Jogador jogador1;
+		Jogador jogador2;
 
-		System.out.println("Digite o nome do jogador n2: ");
-		String nome2 = sc.nextLine();
-		Jogador jogador2 = new Jogador(nome2);
-		Tabela tabelaJogador2 = new Tabela();
-		jogador2.setT(tabelaJogador2);
+		if (jg.getJogadores().size() > 1) {
+			System.out.print("Deseja jogar com os jogadores cadastrados? (s/n) ");
+			String jogarCadastrados = sc.next().toLowerCase();
+			if (jogarCadastrados.charAt(0) == 's') {
+				for (int i = 0; i < jg.getJogadores().size(); i++) {
+					System.out.println("Jogador (" + i + ") " + jg.getJogadores().get(i).getNome());
+				}
+				System.out.print("Digite o index do jogador1: ");
+				int indexJogador1 = sc.nextInt();
+				System.out.print("Digite o index do jogador2: ");
+				int indexJogador2 = sc.nextInt();
 
-		a.cadastrarJogadores(new ArrayList<Jogador>(Arrays.asList(new Jogador[] { jogador1, jogador2 })));
+				jogador1 = jg.getJogadores().get(indexJogador1);
+				jogador2 = jg.getJogadores().get(indexJogador2);
+			} else {
+				sc.nextLine();
+				System.out.println("Digite o nome do jogador n1: ");
+				String nome = sc.nextLine();
+				jogador1 = new Jogador(nome);
+				Tabela tabelaJogador1 = new Tabela();
+				jogador1.setT(tabelaJogador1);
+
+				System.out.println("Digite o nome do jogador n2: ");
+				String nome2 = sc.nextLine();
+				jogador2 = new Jogador(nome2);
+				Tabela tabelaJogador2 = new Tabela();
+				jogador2.setT(tabelaJogador2);
+
+				a.cadastrarJogadores(new ArrayList<Jogador>(Arrays.asList(new Jogador[] { jogador1, jogador2 })));
+
+				jg.atualizarJogadores(a);
+			}
+		} else {
+
+			System.out.println("Digite o nome do jogador n1: ");
+			String nome = sc.nextLine();
+			jogador1 = new Jogador(nome);
+			Tabela tabelaJogador1 = new Tabela();
+			jogador1.setT(tabelaJogador1);
+
+			System.out.println("Digite o nome do jogador n2: ");
+			String nome2 = sc.nextLine();
+			jogador2 = new Jogador(nome2);
+			Tabela tabelaJogador2 = new Tabela();
+			jogador2.setT(tabelaJogador2);
+
+			a.cadastrarJogadores(new ArrayList<Jogador>(Arrays.asList(new Jogador[] { jogador1, jogador2 })));
+
+			jg.atualizarJogadores(a);
+		}
 
 		for (int jgdores = 1; jgdores < 3; jgdores++) {
 			Jogador jogador;
@@ -166,11 +208,12 @@ public class Menu {
 		}
 
 		System.out.println("TOTAL");
-		System.out.println("Jogador = " + jogador1.getNome() + " " + jogador1.getT().calcularPontosTotal());
-		System.out.println("Jogador = " + jogador2.getNome() + " " + jogador2.getT().calcularPontosTotal());
+		System.out.println("Jogador " + jogador1.getNome() + "= " + jogador1.getT().calcularPontosTotal());
+		System.out.println("Jogador " + jogador2.getNome() + "= " + jogador2.getT().calcularPontosTotal());
 
 		a.escreverTabela(jogador1);
 		a.escreverTabela(jogador2);
+
 	}
 
 	public static void restaurarDados(Dados[] dados, Dados d1, Dados d2, Dados d3, Dados d4, Dados d5) {
@@ -293,7 +336,5 @@ public class Menu {
 			break;
 		}
 		}
-
 	}
-
 }

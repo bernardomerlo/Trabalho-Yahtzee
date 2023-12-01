@@ -6,15 +6,15 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Arquivos {
 	static Scanner sc = new Scanner(System.in);
+	private JogadoresCadastrados jogadores = new JogadoresCadastrados();
 
 	public void lerDados() {
-		String caminho = "c:\\temp\\saida.txt";
+		String caminho = "saida.txt";
 		try {
 			File arquivo = new File(caminho);
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(arquivo));
@@ -36,7 +36,7 @@ public class Arquivos {
 	}
 
 	public void escreverTabela(Jogador jogador) {
-		String caminho = "c:\\temp\\saida.txt";
+		String caminho = "saida.txt";
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminho, true))) {
 			bw.write("Jogador: " + jogador.getNome() + "\n");
 			bw.write("1s: " + jogador.getT().getOnes() + "p\n");
@@ -60,7 +60,7 @@ public class Arquivos {
 	}
 
 	public void mostrarJogadoresCadastrados() {
-		String caminho = "c:\\temp\\jogadores.txt";
+		String caminho = "jogadores.txt";
 		try {
 			File arquivo = new File(caminho);
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(arquivo));
@@ -79,20 +79,19 @@ public class Arquivos {
 
 	public List<Jogador> listaJogadores() {
 		char cadastrar = 's';
-		List<Jogador> jogadores = new ArrayList<Jogador>();
 		while (cadastrar == 's') {
 			System.out.print("Digite o nome: ");
 			String nome = sc.nextLine();
-			jogadores.add(new Jogador(nome));
+			jogadores.getJogadores().add(new Jogador(nome));
 			System.out.print("Deseja cadastrar mais? (s/n) ");
 			cadastrar = sc.nextLine().toLowerCase().charAt(0);
 		}
 		System.out.println();
-		return jogadores;
+		return jogadores.getJogadores();
 	}
 
 	public void cadastrarJogadores(List<Jogador> jogadores) {
-		String caminho = "c:\\temp\\jogadores.txt";
+		String caminho = "jogadores.txt";
 		for (Jogador j : jogadores) {
 			try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminho, true))) {
 				bw.write("Jogador: " + j.getNome() + "\n");
@@ -101,5 +100,4 @@ public class Arquivos {
 			}
 		}
 	}
-
 }
