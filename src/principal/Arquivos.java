@@ -19,6 +19,10 @@ public class Arquivos {
 			File arquivo = new File(caminho);
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(arquivo));
 			String linha;
+			boolean passou = false;
+
+			System.out.println();
+			System.out.println("====================");
 			while ((linha = bufferedReader.readLine()) != null) {
 				String[] vet = linha.split(" ");
 				if (vet[0].equals("Jogador:")) {
@@ -26,12 +30,21 @@ public class Arquivos {
 				}
 				if (vet[0].equals("Total") && vet[1].equals("Final:")) {
 					System.out.println(linha);
-					System.out.println();
+					if (passou) {
+						System.out.println("====================");
+					}
+					passou = !passou;
 				}
 			}
+			if (passou) {
+				System.out.println("====================");
+			}
+			System.out.println();
 			bufferedReader.close();
 		} catch (IOException e) {
-			System.out.println("Erro ao ler o arquivo");
+			System.out.println();
+			System.out.println("Erro ao ler o arquivo, possívelmente ele ainda nao existe");
+			System.out.println();
 		}
 	}
 
@@ -55,11 +68,15 @@ public class Arquivos {
 			bw.write("Yahtzee: " + jogador.getT().getYahtzee() + "p\n");
 			bw.write("Total Final: " + jogador.getT().getTotalFinal() + "p\n");
 		} catch (IOException erroEscrita1) {
-			System.out.println("Erro: " + erroEscrita1.getMessage());
+			System.out.println();
+			System.out.println("Erro ao escrever o arquivo, possívelmente ele ainda nao existe");
+			System.out.println();
 		}
 	}
 
 	public void mostrarJogadoresCadastrados() {
+		System.out.println();
+		System.out.println("=======JOGADORES CADASTRADOS=======");
 		String caminho = "jogadores.txt";
 		try {
 			File arquivo = new File(caminho);
@@ -73,8 +90,13 @@ public class Arquivos {
 			}
 			bufferedReader.close();
 		} catch (IOException e) {
-			System.out.println("Erro ao ler o arquivo");
+			System.out.println();
+			System.out.println("Erro ao ler o arquivo, possívelmente ele ainda nao existe");
+			System.out.println();
+
 		}
+		System.out.println("===================================");
+		System.out.println();
 	}
 
 	public List<Jogador> listaJogadores() {
@@ -96,7 +118,10 @@ public class Arquivos {
 			try (BufferedWriter bw = new BufferedWriter(new FileWriter(caminho, true))) {
 				bw.write("Jogador: " + j.getNome() + "\n");
 			} catch (IOException erroEscrita1) {
-				System.out.println("Erro: " + erroEscrita1.getMessage());
+				System.out.println();
+				System.out.println("Erro ao escrever o arquivo, possívelmente ele ainda nao existe");
+				System.out.println();
+
 			}
 		}
 	}

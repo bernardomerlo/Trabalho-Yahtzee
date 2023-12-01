@@ -13,6 +13,7 @@ public class ProgramaPrincipal {
 
 		while (escolhaInicial != 5) {
 			menu.menu();
+			System.out.print("Digite o que voce deseja fazer: ");
 			escolhaInicial = sc.nextInt();
 			sc.nextLine();
 			if (escolhaInicial == 1) {

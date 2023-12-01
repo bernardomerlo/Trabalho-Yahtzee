@@ -38,7 +38,6 @@ public class JogadoresCadastrados {
 			}
 			bufferedReader.close();
 		} catch (IOException e) {
-			System.out.println("Erro ao ler o arquivo");
 		}
 	}
 }

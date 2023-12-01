@@ -26,9 +26,14 @@ public class Menu {
 			System.out.print("Deseja jogar com os jogadores cadastrados? (s/n) ");
 			String jogarCadastrados = sc.next().toLowerCase();
 			if (jogarCadastrados.charAt(0) == 's') {
+				System.out.println();
+				System.out.println("=======JOGADORES CADASTRADOS=======");
 				for (int i = 0; i < jg.getJogadores().size(); i++) {
-					System.out.println("Jogador (" + i + ") " + jg.getJogadores().get(i).getNome());
+					System.out.println("Jogador (" + i + "): " + jg.getJogadores().get(i).getNome());
 				}
+				System.out.println("===================================");
+				System.out.println();
+
 				System.out.print("Digite o index do jogador1: ");
 				int indexJogador1 = sc.nextInt();
 				System.out.print("Digite o index do jogador2: ");
@@ -36,15 +41,16 @@ public class Menu {
 
 				jogador1 = jg.getJogadores().get(indexJogador1);
 				jogador2 = jg.getJogadores().get(indexJogador2);
+				sc.nextLine();
 			} else {
 				sc.nextLine();
-				System.out.println("Digite o nome do jogador n1: ");
+				System.out.print("Digite o nome do jogador n1: ");
 				String nome = sc.nextLine();
 				jogador1 = new Jogador(nome);
 				Tabela tabelaJogador1 = new Tabela();
 				jogador1.setT(tabelaJogador1);
 
-				System.out.println("Digite o nome do jogador n2: ");
+				System.out.print("Digite o nome do jogador n2: ");
 				String nome2 = sc.nextLine();
 				jogador2 = new Jogador(nome2);
 				Tabela tabelaJogador2 = new Tabela();
@@ -56,13 +62,13 @@ public class Menu {
 			}
 		} else {
 
-			System.out.println("Digite o nome do jogador n1: ");
+			System.out.print("Digite o nome do jogador n1: ");
 			String nome = sc.nextLine();
 			jogador1 = new Jogador(nome);
 			Tabela tabelaJogador1 = new Tabela();
 			jogador1.setT(tabelaJogador1);
 
-			System.out.println("Digite o nome do jogador n2: ");
+			System.out.print("Digite o nome do jogador n2: ");
 			String nome2 = sc.nextLine();
 			jogador2 = new Jogador(nome2);
 			Tabela tabelaJogador2 = new Tabela();
@@ -82,6 +88,7 @@ public class Menu {
 				jogador = jogador2;
 			}
 
+			System.out.println();
 			System.out.println("Vez do Jogador " + jogador.getNome());
 			System.out.println();
 
@@ -189,33 +196,45 @@ public class Menu {
 
 			Dados[] dadosFinal = { d1Final, d2Final, d3Final, d4Final, d5Final };
 			System.out.println();
-			System.out.println("VETOR FINAL");
-			for (Dados d : dadosFinal) {
-				System.out.println(d.getNumFace());
-			}
+			System.out.println("Seus dados");
+			System.out.println("D1: " + d1Final.getNumFace() + " D2: " + d2Final.getNumFace() + " D3: "
+					+ d3Final.getNumFace() + " D4: " + d4Final.getNumFace() + " D5: " + d5Final.getNumFace());
 
 			mostrarTabela(t, dadosFinal);
 
-			System.out.println("Digite o que voce deseja atribuir: ");
+			System.out.print("Digite o que voce deseja atribuir: ");
 			int escolhaAtribuir = sc.nextInt();
 
 			escolha(escolhaAtribuir, jogador.getT(), dadosFinal);
-
 			mostraTabelaAtualizada(t);
-
 			restaurarDados(dadosIniciais, d1, d2, d3, d4, d5);
-
 		}
 
-		System.out.println("TOTAL");
-		System.out.println("Jogador " + jogador1.getNome() + "= " + jogador1.getT().calcularPontosTotal());
-		System.out.println("Jogador " + jogador2.getNome() + "= " + jogador2.getT().calcularPontosTotal());
+		System.out.println();
+		System.out.println("=======TOTAL=======");
+		System.out.println("Jogador " + jogador1.getNome() + ": " + jogador1.getT().calcularPontosTotal() + " pontos");
+		System.out.println("Jogador " + jogador2.getNome() + ": " + jogador2.getT().calcularPontosTotal() + " pontos");
+		System.out.println("===================");
+
+		if (jogador1.getT().calcularPontosTotal() > jogador2.getT().calcularPontosTotal()) {
+			System.out.println();
+			System.out.println("JOGADOR " + jogador1.getNome() + " É O VENCEDOR");
+			System.out.println();
+		} else if (jogador1.getT().calcularPontosTotal() < jogador2.getT().calcularPontosTotal()) {
+			System.out.println();
+			System.out.println("JOGADOR " + jogador2.getNome().toUpperCase() + " É O VENCEDOR");
+			System.out.println();
+		} else {
+			System.out.println();
+			System.out.println("EMPATE");
+			System.out.println();
+		}
 
 		a.escreverTabela(jogador1);
 		a.escreverTabela(jogador2);
-
 	}
 
+	// atribui os dados ao vetor dados
 	public static void restaurarDados(Dados[] dados, Dados d1, Dados d2, Dados d3, Dados d4, Dados d5) {
 		dados[0] = d1;
 		dados[1] = d2;
