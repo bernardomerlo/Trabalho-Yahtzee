@@ -79,7 +79,9 @@ public class Menu {
 			jg.atualizarJogadores(a);
 		}
 
-		for (int jgdores = 1; jgdores < 3; jgdores++) {
+		for (int jgdores = 1; jgdores <= 26; jgdores++) {
+			System.out.println("RODADA " + jgdores + " DE 26");
+
 			Jogador jogador;
 			// se o mod do index do for == 1, é a vez do jogador1 se nao, do jogador2
 			if (jgdores % 2 == 1) {
@@ -90,7 +92,6 @@ public class Menu {
 
 			System.out.println();
 			System.out.println("Vez do Jogador " + jogador.getNome());
-			System.out.println();
 
 			Dados[] dadosIniciais = new Dados[5];
 			Dados[] dadosAux = new Dados[5];
@@ -252,7 +253,7 @@ public class Menu {
 		System.out.println("4-FOURS = " + t.getFours());
 		System.out.println("5-FIVES = " + t.getFives());
 		System.out.println("6-SIXES = " + t.getSixes());
-		System.out.println("TOTAL TEMPORARIO = " + t.getTotal1());
+		System.out.println("TOTAL TEMPORARIO = " + t.calcularSoma1());
 		System.out.println();
 		System.out.println("7-THREE OF A KIND = " + t.getTresIguais());
 		System.out.println("8-FOUR OF A KIND = " + t.getQuatroIguais());
@@ -273,7 +274,7 @@ public class Menu {
 		System.out.println("4-FOURS = " + t.fours(dadosFinal));
 		System.out.println("5-FIVES = " + t.fives(dadosFinal));
 		System.out.println("6-SIXES = " + t.sixes(dadosFinal));
-		if (t.getBonus() > 0) {
+		if (t.calcularSoma1() > 62) {
 			System.out.println("BONUS = " + t.getBonus());
 		}
 		System.out.println();

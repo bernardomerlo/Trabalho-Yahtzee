@@ -2,7 +2,7 @@ package principal;
 
 import java.util.Random;
 
-public class Dados {
+public class Dados implements Comparable<Dados> {
 	private int numFace;
 	private int posVetor;
 
@@ -27,4 +27,8 @@ public class Dados {
 		this.posVetor = posVetor;
 	}
 
+	@Override
+	public int compareTo(Dados outro) {
+		return Integer.compare(this.numFace, outro.numFace);
+	}
 }
