@@ -296,22 +296,25 @@ public class Tabela {
 		return total;
 	}
 
-	public int sequenciaMenor(Dados[] dados) {// Clone dos dados para não modificar a ordem original
-		Dados[] dadosOrdenados = dados.clone();
-		Arrays.sort(dadosOrdenados);
+	public int sequenciaMenor(Dados[] dados) {
+		int dado1 = dados[0].getNumFace();
+		int dado2 = dados[1].getNumFace();
+		int dado3 = dados[2].getNumFace();
+		int dado4 = dados[3].getNumFace();
+		int dado5 = dados[4].getNumFace();
+		int[] listaDados = { dado1, dado2, dado3, dado4, dado5 };
+
+		Arrays.sort(listaDados);
 		int total = 0;
 
-		// Verifica se há pelo menos uma sequência de 4 números consecutivos
-		for (int i = 0; i <= dadosOrdenados.length - 4; i++) {
-			if (dadosOrdenados[i + 1].getNumFace() == dadosOrdenados[i].getNumFace() + 1
-					&& dadosOrdenados[i + 2].getNumFace() == dadosOrdenados[i].getNumFace() + 2
-					&& dadosOrdenados[i + 3].getNumFace() == dadosOrdenados[i].getNumFace() + 3) {
-				total = 30; // Sequência de 4 números encontrada
+		for (int i = 0; i <= listaDados.length - 4; i++) {
+			if (listaDados[i + 1] == listaDados[i] + 1 && listaDados[i + 2] == listaDados[i] + 2
+					&& listaDados[i + 3] == listaDados[i] + 3) {
+				total = 30;
 			}
 		}
 
-		return total; // Nenhuma sequência de 4 números encontrada
-
+		return total;
 	}
 
 	public int sequenciaMaior(Dados[] dados) {
