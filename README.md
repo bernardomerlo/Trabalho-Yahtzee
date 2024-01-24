@@ -16,11 +16,10 @@ git clone https://github.com/seu-usuario/yahtzee-game-java.git
 cd yahtzee-game-java
 
 ### Compilação
-1. Compile o código-fonte do jogo:
-javac YahtzeeGame.java
+3. Compile o código-fonte do jogo
 
 ### Execução
-1. Execute o jogo:
+4. Execute o jogo:
 java YahtzeeGame
 
 ### Regras do Jogo
